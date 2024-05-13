@@ -9,6 +9,7 @@ const AdminSchema = new Schema(
         phoneNumber: {
             type: String,
             required: true,
+            unique: true,
         },
         password: {
             type: String,
