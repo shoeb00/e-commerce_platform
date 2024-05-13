@@ -1,8 +1,9 @@
 import { EOrderStatus } from "../enums/orderStatus.enum";
+import { IOrderProduct } from "./orderProducts.interface";
 
 export interface IOrder {
     totalPrice: number;
-    products: [{ quantity: number; productId: string }];
+    products: IOrderProduct[];
     status: EOrderStatus;
-    user: string;
+    userId: string;
 }

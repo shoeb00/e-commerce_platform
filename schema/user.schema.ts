@@ -14,6 +14,10 @@ const UserSchema = new Schema(
             type: String,
             required: true,
         },
+        storeId: {
+            type: String,
+            required: true,
+        },
     },
     { timestamps: true }
 );

@@ -14,7 +14,7 @@ const ProductSchema = new Schema(
             type: Number,
             required: true,
         },
-        store: {
+        storeId: {
             type: String,
             required: true,
         },
