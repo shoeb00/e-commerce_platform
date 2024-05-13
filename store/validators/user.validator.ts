@@ -8,9 +8,9 @@ import {
 } from "./index";
 
 export const VUpdateProfile = object({
-    name: nameValidator,
-    password: passwordValidator,
-});
+    name: nameValidator.optional(),
+    password: passwordValidator.optional(),
+}).min(1);
 
 export const VBuyOrder = object({
     productId: objectIdValidator,
