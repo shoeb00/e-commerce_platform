@@ -6,6 +6,7 @@ import {
     quantityValidator,
     categoryValidator,
     priceValidator,
+    dateValidator,
 } from "./index";
 
 export const VUpdateProfile = Joi.object({
@@ -26,3 +27,9 @@ export const VSearchProduct = Joi.object({
     category: categoryValidator,
     priceRange: priceValidator,
 });
+
+export const VOrderHistory = Joi.object({
+    category: categoryValidator,
+    startDate: dateValidator,
+    endDate: dateValidator,
+}).min(0);
