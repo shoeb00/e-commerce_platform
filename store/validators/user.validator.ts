@@ -7,11 +7,19 @@ import {
     categoryValidator,
     priceValidator,
     dateValidator,
+    phoneNumberValidator,
 } from "./index";
+
+export const VRegisterUser = Joi.object({
+    name: nameValidator,
+    password: passwordValidator,
+    phoneNumber: phoneNumberValidator,
+});
 
 export const VUpdateProfile = Joi.object({
     name: nameValidator.optional(),
     password: passwordValidator.optional(),
+    phoneNumber: phoneNumberValidator,
 }).min(1);
 
 export const VBuyOrder = Joi.object({
