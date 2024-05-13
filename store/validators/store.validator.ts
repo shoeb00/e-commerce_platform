@@ -1,25 +1,32 @@
-import { object } from "joi";
+import Joi from "joi";
 import {
     nameValidator,
-    objectIdValidator,
-    priceValidator,
+    passwordValidator,
+    quantityValidator,
     categoryValidator,
+    priceValidator,
+    phoneNumberValidator,
+    objectIdValidator,
 } from "./index";
 
-export const VAddProduct = object({
+export const VRegisterStore = Joi.object({
     name: nameValidator,
-    quantity: priceValidator,
-    price: priceValidator,
+    ownerName: nameValidator,
+    password: passwordValidator,
+    phoneNumber: phoneNumberValidator,
+}).min(4);
+
+export const VAddProduct = Joi.object({
+    name: nameValidator,
     category: categoryValidator,
-});
+    quantity: quantityValidator,
+    price: priceValidator,
+}).min(4);
 
-export const VUpdateProductDetails = object({
-    name: nameValidator.optional(),
-    quantity: priceValidator.optional(),
-    category: categoryValidator.optional(),
-    price: priceValidator.optional(),
-}).min(1);
-
-export const VDeleteProduct = object({
-    productId: objectIdValidator,
-});
+export const VUpdateProductDetails = Joi.object({
+    id: objectIdValidator.required(),
+    name: nameValidator,
+    category: categoryValidator,
+    quantity: quantityValidator,
+    price: priceValidator,
+}).min(2);
