@@ -2,22 +2,22 @@ import { object } from "joi";
 import {
     nameValidator,
     objectIdValidator,
-    numberValidator,
+    priceValidator,
     categoryValidator,
 } from "./index";
 
 export const VAddProduct = object({
     name: nameValidator,
-    quantity: numberValidator,
-    price: numberValidator,
+    quantity: priceValidator,
+    price: priceValidator,
     category: categoryValidator,
 });
 
 export const VUpdateProductDetails = object({
     name: nameValidator.optional(),
-    quantity: numberValidator.optional(),
+    quantity: priceValidator.optional(),
     category: categoryValidator.optional(),
-    price: numberValidator.optional(),
+    price: priceValidator.optional(),
 }).min(1);
 
 export const VDeleteProduct = object({

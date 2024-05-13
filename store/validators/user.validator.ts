@@ -1,27 +1,28 @@
-import { object } from "joi";
+import Joi from "joi";
 import {
     nameValidator,
     passwordValidator,
     objectIdValidator,
-    numberValidator,
+    quantityValidator,
     categoryValidator,
+    priceValidator,
 } from "./index";
 
-export const VUpdateProfile = object({
+export const VUpdateProfile = Joi.object({
     name: nameValidator.optional(),
     password: passwordValidator.optional(),
 }).min(1);
 
-export const VBuyOrder = object({
+export const VBuyOrder = Joi.object({
     productId: objectIdValidator,
-    quantity: numberValidator,
+    quantity: quantityValidator,
 });
 
-export const VCancelOrder = object({
+export const VCancelOrder = Joi.object({
     productId: objectIdValidator,
 });
 
-export const VSearchProduct = object({
+export const VSearchProduct = Joi.object({
     category: categoryValidator,
-    priceRange: numberValidator,
+    priceRange: priceValidator,
 });
