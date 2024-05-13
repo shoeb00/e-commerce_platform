@@ -30,6 +30,7 @@ class Database {
                 ProductSchema
             );
             this.Order = connection.model<IOrder>("orders", OrderSchema);
+            console.log()
         } catch (error) {
             throw error;
         }
