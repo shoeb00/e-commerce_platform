@@ -74,7 +74,7 @@ export const placeOrder = async (req: Request, res: Response) => {
                 {
                     quantity: product.quantity,
                 }
-            ).lean();
+            );
             promises.push(promise);
         }
         const result = await Promise.all(promises);
@@ -121,14 +121,14 @@ export const cancelOrder = async (req: Request, res: Response) => {
             const promise = database.Product.updateOne(
                 { id: product.productId },
                 { $inc: { quantity: product.quantity } }
-            ).lean();
+            );
             promises.push(promise);
         }
         const result = await Promise.all(promises);
         const order = await database.Order.updateOne(
             { id: orderId },
             { status: EOrderStatus.CANCELLED }
-        ).lean();
+        );
         return res
             .status(200)
             .json({ message: "Order cancelled successfully", order });

@@ -14,6 +14,7 @@ export const VRegisterUser = Joi.object({
     name: nameValidator,
     password: passwordValidator,
     phoneNumber: phoneNumberValidator,
+    storeId: objectIdValidator,
 });
 
 export const VUpdateProfile = Joi.object({

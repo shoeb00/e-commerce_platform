@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import { EProductCategory } from "../store/enums/productCategory.enum";
 
 const ProductSchema = new Schema(
     {
@@ -12,6 +13,10 @@ const ProductSchema = new Schema(
         },
         quantity: {
             type: Number,
+            required: true,
+        },
+        category: {
+            type: EProductCategory,
             required: true,
         },
         storeId: {
