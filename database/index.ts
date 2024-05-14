@@ -1,40 +1,41 @@
-import mongoose, { Model } from "mongoose";
+import mongoose, { Model, Mongoose } from "mongoose";
 import UserSchema from "../schema/user.schema";
-import StoreSchema from "../schema/store.schema";
 import { IUser } from "../store/interfaces/user.interface";
-import { IStore } from "../store/interfaces/store.interface";
-import { IAdmin } from "../store/interfaces/admin.interface";
-import AdminSchema from "../schema/admin.schema";
 import { IProduct } from "../store/interfaces/product.interface";
 import ProductSchema from "../schema/product.schema";
 import { IOrder } from "../store/interfaces/order.interface";
 import OrderSchema from "../schema/order.schema";
 
-const DB_URL =
-    process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/e-commerce";
-
 class Database {
-    User: Model<IUser>;
-    Store: Model<IStore>;
-    Admin: Model<IAdmin>;
-    Product: Model<IProduct>;
-    Order: Model<IOrder>;
+    private connection!: Mongoose;
+    private DB_URL: string;
+    User!: Model<IUser>;
+    Product!: Model<IProduct>;
+    Order!: Model<IOrder>;
+    constructor() {
+        this.DB_URL =
+            process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/e-commerce";
+        // this.connect();
+    }
     async connect() {
-        try {
-            const connection = await mongoose.connect(DB_URL);
-            this.User = connection.model<IUser>("users", UserSchema);
-            this.Store = connection.model<IStore>("stores", StoreSchema);
-            this.Admin = connection.model<IAdmin>("admins", AdminSchema);
-            this.Product = connection.model<IProduct>(
-                "products",
-                ProductSchema
-            );
-            this.Order = connection.model<IOrder>("orders", OrderSchema);
-            console.log()
-        } catch (error) {
-            throw error;
-        }
+        mongoose.connect(this.DB_URL).then((connection) => {
+            this.connection = connection;
+            this.createModels();
+        });
+    }
+    createModels() {
+        this.User = this.connection.model<IUser>("user", UserSchema, "users");
+        this.Product = this.connection.model<IProduct>(
+            "product",
+            ProductSchema,
+            "products"
+        );
+        this.Order = this.connection.model<IOrder>(
+            "order",
+            OrderSchema,
+            "orders"
+        );
     }
 }
 
-export default new Database();
+export const database = new Database();

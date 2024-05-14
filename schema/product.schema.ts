@@ -16,7 +16,8 @@ const ProductSchema = new Schema(
             required: true,
         },
         category: {
-            type: EProductCategory,
+            type: String,
+            enum: EProductCategory,
             required: true,
         },
         storeId: {

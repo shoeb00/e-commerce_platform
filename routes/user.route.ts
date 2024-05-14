@@ -5,17 +5,14 @@ import {
     placeOrder,
     viewProducts,
 } from "../controllers/user/orderManagement";
-import { register, updateUserDetails } from "../controllers/user/profile";
+import { authenticate } from "../authentication";
 const userRouter = Router();
 
-userRouter.get("/getAuthToken");
-userRouter.get("/ordersHistory", ordersHistory);
-userRouter.get("/products", viewProducts);
+userRouter.get("/ordersHistory", authenticate, ordersHistory);
+userRouter.get("/products", authenticate, viewProducts);
 
-userRouter.post("/register", register);
-userRouter.post("/placeOrder", placeOrder);
+userRouter.post("/placeOrder", authenticate, placeOrder);
 
-userRouter.put("/cancelOrder", cancelOrder);
-userRouter.put("/updateProfile", updateUserDetails);
+userRouter.put("/cancelOrder", authenticate, cancelOrder);
 
 export default userRouter;

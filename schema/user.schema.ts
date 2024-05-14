@@ -1,23 +1,22 @@
 import { Schema } from "mongoose";
+import { ERoles } from "../store/enums/roles.enum";
+import { IUser } from "../store/interfaces/user.interface";
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<IUser>(
     {
         name: {
             type: String,
             required: true,
         },
-        phoneNumber: {
+        email: {
             type: String,
             required: true,
             unique: true,
         },
-        password: {
+        storeId: String,
+        role: {
             type: String,
-            required: true,
-        },
-        storeId: {
-            type: String,
-            required: true,
+            enum: ERoles,
         },
     },
     { timestamps: true }

@@ -1,32 +1,8 @@
 import { Request, Response } from "express";
-import database from "../../database";
-import {
-    VRegisterUser,
-    VUpdateProfile,
-} from "../../store/validators/user.validator";
-import { hashSync } from "bcrypt";
+import { database } from "../../database";
+import { VUpdateProfile } from "../../store/validators/user.validator";
 import { objectIdValidator } from "../../store/validators";
-
-export const register = async (req: Request, res: Response) => {
-    try {
-        const input = req.body;
-        const { error } = VRegisterUser.validate(input);
-        if (error) {
-            console.log(error.message);
-            return res.status(400).json({ message: error.message });
-        }
-        const password = hashSync(input.password, 10);
-        input.password = password;
-        const result = await database.User.create(input);
-        res.status(201).json({
-            message: "User registration is successful",
-            result,
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Something went wrong" });
-    }
-};
+import mongoose from "mongoose";
 
 export const updateUserDetails = async (req: Request, res: Response) => {
     try {
@@ -36,14 +12,9 @@ export const updateUserDetails = async (req: Request, res: Response) => {
             console.log(error.message);
             return res.status(400).json({ message: error.message });
         }
-        if (input.password) {
-            const password = hashSync(input.password, 10);
-            input.password = password;
-        }
-        const result = await database.User.updateOne(
-            { id: req.body.user.id },
-            input
-        );
+        const filter = { _id: input.userId };
+        const update = { role: input.role, storeId: input.storeId };
+        const result = await database.User.findByIdAndUpdate(filter, update);
         res.status(201).json({
             message: "User details updated successfully",
             result,

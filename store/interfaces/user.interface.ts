@@ -1,6 +1,9 @@
+import { ERoles } from "../enums/roles.enum";
+
 export interface IUser {
+    id?: string;
     name: string;
-    phoneNumber: string;
-    password?: string;
-    storeId: string;
+    email: string;
+    storeId?: string;
+    role: ERoles;
 }
