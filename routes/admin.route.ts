@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { deleteStore } from "../controllers/store";
-import { deleteUser } from "../controllers/user/profile";
+import { deleteUser, updateUserDetails } from "../controllers/user/profile";
+import { authenticate } from "../authentication";
 const adminRouter = Router();
 
-adminRouter.get("/getAuthToken");
-
-adminRouter.delete("/deleteStore", deleteStore);
-adminRouter.delete("/deleteUser", deleteUser);
-adminRouter.delete("/deleteAdmin", deleteUser);
+adminRouter.delete("/deleteUser", authenticate, deleteUser);
+adminRouter.put("/updateUserDetails", authenticate, updateUserDetails);
 
 export default adminRouter;

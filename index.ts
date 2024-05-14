@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
-// import userRouter from "./routes/user.route";
+import userRouter from "./routes/user.route";
 import storeRouter from "./routes/store.route";
-// import adminRouter from "./routes/admin.route";
+import adminRouter from "./routes/admin.route";
 import authRouter from "./routes/authentication.route";
 import { json, urlencoded } from "body-parser";
 import { database } from "./database";
@@ -12,9 +12,9 @@ import { cache } from "./database/cache";
 const app = express();
 app.use(json());
 app.use(urlencoded({ extended: false }));
-// app.use("/user", userRouter);
+app.use("/user", userRouter);
 app.use("/store", storeRouter);
-// app.use("/admin", adminRouter);
+app.use("/admin", adminRouter);
 app.use(authRouter);
 
 const PORT = process.env.PORT;

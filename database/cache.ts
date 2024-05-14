@@ -9,6 +9,7 @@ class Cache {
         await this.client.connect();
     }
     async set(key: string, value: object, expiry: number) {
+        if (!key.length) return;
         await this.client.set(key, JSON.stringify(value), { EX: expiry });
     }
     async get(key: string): Promise<IUser> {
@@ -16,7 +17,7 @@ class Cache {
         return value && JSON.parse(value);
     }
     async delete(key: string) {
-        if (!key) return;
+        if (!key.length) return;
         await this.client.del(key);
     }
     async disconnect() {

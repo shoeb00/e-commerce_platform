@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { addProduct } from "../controllers/store";
-import { updateUserDetails } from "../controllers/user/profile";
+import { addProduct, updateProductDetails } from "../controllers/store";
 import { authenticate } from "../authentication";
 const storeRouter = Router();
 
 storeRouter.post("/addProduct", authenticate, addProduct);
 
-storeRouter.put("/updateProductDetails", authenticate, updateUserDetails);
+storeRouter.put("/updateProductDetails", authenticate, updateProductDetails);
 
 export default storeRouter;

@@ -12,6 +12,7 @@ export const VAddProduct = Joi.object({
     category: categoryValidator,
     quantity: quantityValidator,
     price: priceValidator,
+    storeId: objectIdValidator,
 }).min(4);
 
 export const VUpdateProductDetails = Joi.object({

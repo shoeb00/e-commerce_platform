@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { database } from "../../database";
 import { VUpdateProfile } from "../../store/validators/user.validator";
-import { hashSync } from "bcrypt";
 import { objectIdValidator } from "../../store/validators";
+import mongoose from "mongoose";
 
 export const updateUserDetails = async (req: Request, res: Response) => {
     try {
@@ -12,14 +12,9 @@ export const updateUserDetails = async (req: Request, res: Response) => {
             console.log(error.message);
             return res.status(400).json({ message: error.message });
         }
-        if (input.password) {
-            const password = hashSync(input.password, 10);
-            input.password = password;
-        }
-        const result = await database.User.updateOne(
-            { id: req.body.user.id },
-            input
-        );
+        const filter = { _id: input.userId };
+        const update = { role: input.role, storeId: input.storeId };
+        const result = await database.User.findByIdAndUpdate(filter, update);
         res.status(201).json({
             message: "User details updated successfully",
             result,

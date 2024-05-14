@@ -9,9 +9,10 @@ import {
 } from "./index";
 
 export const VUpdateProfile = Joi.object({
-    storeId: objectIdValidator,
-    role: roleValidator,
-}).min(1);
+    userId: objectIdValidator,
+    storeId: objectIdValidator.optional(),
+    role: roleValidator.optional(),
+}).min(2);
 
 export const VBuyOrder = Joi.object({
     productId: objectIdValidator,

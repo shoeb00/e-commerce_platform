@@ -3,8 +3,6 @@ import { authCallback, authenticationURL } from "../authentication";
 import { cache } from "../database/cache";
 const authRouter = Router();
 
-authRouter.get("/getAuthToken");
-
 authRouter.get("/google/callback", authCallback);
 
 authRouter.get("/login", (req, res) => {
