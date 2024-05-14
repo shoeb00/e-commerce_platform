@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import { EOrderStatus } from "../store/enums/orderStatus.enum";
 
 const OrderSchema = new Schema(
     {
@@ -16,6 +17,10 @@ const OrderSchema = new Schema(
         userId: {
             type: String,
             required: true,
+        },
+        status: {
+            type: String,
+            enum: EOrderStatus,
         },
     },
     { timestamps: true }

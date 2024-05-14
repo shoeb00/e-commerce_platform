@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { EProductCategory } from "../enums/productCategory.enum";
 import { EOrderStatus } from "../enums/orderStatus.enum";
+import { ERoles } from "../enums/roles.enum";
 
 export const objectIdValidator = Joi.string().required().length(12);
 export const quantityValidator = Joi.number().required().min(1).max(10);
@@ -16,6 +17,7 @@ export const categoryValidator = Joi.string().valid(
 export const orderStatusValidator = Joi.string().valid(
     ...Object.keys(EOrderStatus)
 );
+export const roleValidator = Joi.string().valid(...Object.keys(ERoles));
 export const dateValidator = Joi.string()
     .required()
     .length(10)

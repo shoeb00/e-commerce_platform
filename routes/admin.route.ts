@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { register } from "../controllers/admin";
 import { deleteStore } from "../controllers/store";
 import { deleteUser } from "../controllers/user/profile";
 const adminRouter = Router();
 
 adminRouter.get("/getAuthToken");
-
-adminRouter.post("/register", register);
 
 adminRouter.delete("/deleteStore", deleteStore);
 adminRouter.delete("/deleteUser", deleteUser);

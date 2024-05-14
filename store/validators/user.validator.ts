@@ -1,26 +1,16 @@
 import Joi from "joi";
 import {
-    nameValidator,
-    passwordValidator,
     objectIdValidator,
     quantityValidator,
     categoryValidator,
-    priceValidator,
     dateValidator,
-    phoneNumberValidator,
+    roleValidator,
+    orderStatusValidator,
 } from "./index";
 
-export const VRegisterUser = Joi.object({
-    name: nameValidator,
-    password: passwordValidator,
-    phoneNumber: phoneNumberValidator,
-    storeId: objectIdValidator,
-});
-
 export const VUpdateProfile = Joi.object({
-    name: nameValidator.optional(),
-    password: passwordValidator.optional(),
-    phoneNumber: phoneNumberValidator,
+    storeId: objectIdValidator,
+    role: roleValidator,
 }).min(1);
 
 export const VBuyOrder = Joi.object({
@@ -34,8 +24,10 @@ export const VCancelOrder = Joi.object({
 
 export const VSearchProduct = Joi.object({
     category: categoryValidator,
-    priceRange: priceValidator,
-});
+    startDate: dateValidator,
+    endDate: dateValidator,
+    status: orderStatusValidator,
+}).min(0);
 
 export const VOrderHistory = Joi.object({
     category: categoryValidator,

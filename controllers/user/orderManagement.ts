@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import database from "../../database";
+import { database } from "../../database";
 import {
     VBuyOrder,
     VSearchProduct,

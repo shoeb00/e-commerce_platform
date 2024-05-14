@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { addProduct, register } from "../controllers/store";
+import { addProduct } from "../controllers/store";
 import { updateUserDetails } from "../controllers/user/profile";
+import { authenticate } from "../authentication";
 const storeRouter = Router();
 
-storeRouter.get("/getAuthToken");
+storeRouter.post("/addProduct", authenticate, addProduct);
 
-storeRouter.post("/register", register);
-storeRouter.post("/addProduct", addProduct);
-
-storeRouter.put("/updateProductDetails", updateUserDetails);
+storeRouter.put("/updateProductDetails", authenticate, updateUserDetails);
 
 export default storeRouter;

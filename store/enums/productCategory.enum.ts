@@ -1,7 +1,7 @@
 export enum EProductCategory {
-    SNACKS,
-    SKIN_CARE,
-    MEDICINE,
-    ELECTRONICS,
-    CLOTHES,
+    SNACKS = "SNACKS",
+    SKIN_CARE = "SKIN_CARE",
+    MEDICINE = "MEDICINE",
+    ELECTRONICS = "ELECTRONICS",
+    CLOTHES = "CLOTHES",
 }
