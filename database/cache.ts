@@ -21,7 +21,7 @@ class Cache {
         await this.client.del(key);
     }
     async disconnect() {
-        await this.client.flushAll();
+        if (process.env.NODE_ENV !== "dev") await this.client.flushAll();
         await this.client.quit();
     }
 }
