@@ -3,9 +3,9 @@ import {
     cancelOrder,
     ordersHistory,
     placeOrder,
-    viewProducts,
 } from "../controllers/user/orderManagement";
 import { authenticate } from "../authentication";
+import { viewProducts } from "../controllers/store";
 const userRouter = Router();
 
 userRouter.get("/ordersHistory", authenticate, ordersHistory);

@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { addProduct, updateProductDetails } from "../controllers/store";
+import {
+    addProduct,
+    addRandomProducts,
+    updateProductDetails,
+    viewProducts,
+} from "../controllers/store";
 import { authenticate } from "../authentication";
 const storeRouter = Router();
 
+storeRouter.get("/products", authenticate, viewProducts);
+
 storeRouter.post("/addProduct", authenticate, addProduct);
+storeRouter.post("/addRandomProducts", authenticate, addRandomProducts);
 
 storeRouter.put("/updateProductDetails", authenticate, updateProductDetails);
 
