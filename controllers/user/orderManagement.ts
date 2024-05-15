@@ -6,32 +6,8 @@ import {
 } from "../../store/validators/user.validator";
 import { IProduct } from "../../store/interfaces/product.interface";
 import { EOrderStatus } from "../../store/enums/orderStatus.enum";
-import { categoryValidator, objectIdValidator } from "../../store/validators";
+import { objectIdValidator } from "../../store/validators";
 import { IOrderProduct } from "../../store/interfaces/orderProducts.interface";
-
-export const viewProducts = async (req: Request, res: Response) => {
-    try {
-        const skip = parseInt(req.params.skip) || 0;
-        const limit = parseInt(req.params.limit) || 10;
-        const category = req.query.category?.toString().toUpperCase();
-        const { error } = categoryValidator.validate(category);
-        if (error) {
-            console.log(error.message);
-            return res.status(400).json({ message: "Invalid orderId" });
-        }
-        const products = await database.Product.find({
-            // category,
-            storeId: req.params.storeId,
-        })
-            .skip(skip)
-            .limit(limit)
-            .lean();
-        return res.status(200).json({ message: "Success", products });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Something went wrong" });
-    }
-};
 
 export const placeOrder = async (req: Request, res: Response) => {
     try {

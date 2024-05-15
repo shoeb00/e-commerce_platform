@@ -1,6 +1,5 @@
 import { google } from "googleapis";
 import { database } from "../database";
-import { IUser } from "../store/interfaces/user.interface";
 import { cache } from "../database/cache";
 import { ERoles } from "../store/enums/roles.enum";
 import { Request, Response, NextFunction } from "express";
@@ -19,7 +18,7 @@ export const authenticate = async (
         res.status(401).json({ message: "Unauthorized" });
     } else {
         req.params.userId = user.id || "";
-        req.params.storeId = user.storeId || "";
+        if (user.storeId) req.params.storeId = user.storeId;
         next();
     }
 };
