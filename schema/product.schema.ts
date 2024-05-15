@@ -14,6 +14,7 @@ const ProductSchema = new Schema(
         quantity: {
             type: Number,
             required: true,
+            min: 0,
         },
         category: {
             type: String,
