@@ -33,7 +33,7 @@ export const deleteUser = async (req: Request, res: Response) => {
             console.log(error.message);
             return res.status(400).json({ message: "Invalid userId" });
         }
-        const result = await database.User.deleteOne({ id: input });
+        const result = await database.User.deleteOne({ _id: input });
         res.status(201).json({
             message: "User deleted successfully",
             result,

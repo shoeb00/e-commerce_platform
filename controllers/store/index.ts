@@ -66,7 +66,7 @@ export const updateProductDetails = async (req: Request, res: Response) => {
             return res.status(400).json({ message: error.message });
         }
         const result = await database.Product.findOneAndUpdate(
-            { storeId: req.params.userId, id: input.id },
+            { storeId: req.params.userId, _id: input.id },
             { ...input }
         );
         res.status(201).json({
