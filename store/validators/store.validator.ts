@@ -6,6 +6,7 @@ import {
     priceValidator,
     objectIdValidator,
 } from "./index";
+import { EOrderStatus } from "../enums/orderStatus.enum";
 
 export const VGetProduct = Joi.object({
     name: Joi.string().min(3),
@@ -30,3 +31,11 @@ export const VUpdateProductDetails = Joi.object({
     quantity: quantityValidator,
     price: priceValidator,
 }).min(2);
+
+export const VUpdateOrderStatus = Joi.object({
+    id: objectIdValidator.required(),
+    status: Joi.string()
+        .valid(EOrderStatus.DELIVERED, EOrderStatus.OUT_FOR_DELIVERY)
+        .insensitive()
+        .required(),
+});
