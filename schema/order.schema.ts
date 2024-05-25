@@ -22,6 +22,10 @@ const OrderSchema = new Schema(
             type: String,
             enum: EOrderStatus,
         },
+        storeId: {
+            type: String,
+            required: true,
+        },
     },
     { timestamps: true }
 );
